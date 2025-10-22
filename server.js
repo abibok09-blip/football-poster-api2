@@ -12,7 +12,8 @@ async function loadImageFromUrl(url) {
   if (!url) throw new Error('Image URL is missing');
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to fetch image: ${url} (${res.status})`);
-  const buffer = await res.buffer();
+  const arrayBuffer = await res.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
   return await loadImage(buffer);
 }
 
