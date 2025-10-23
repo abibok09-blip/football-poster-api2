@@ -40,7 +40,7 @@ app.post('/generate', async (req, res) => {
 
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 96px Arial';
+    ctx.font = 'bold 196px Arial';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
@@ -58,7 +58,7 @@ app.post('/generate', async (req, res) => {
     const awayX = width * 0.75;
     const vsX = width / 2;
 
-    ctx.font = 'bold 72px Arial';
+    ctx.font = 'bold 172px Arial';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
@@ -94,11 +94,11 @@ app.post('/generate', async (req, res) => {
     }
 
     // "VS" между логотипами
-    ctx.font = 'bold 140px Arial';
+    ctx.font = 'bold 240px Arial';
     ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40); // Центрировали
 
     // Год рождения — снизу по центру
-    ctx.font = 'bold 64px Arial';
+    ctx.font = 'bold 164px Arial';
     ctx.textBaseline = 'bottom';
     ctx.fillText(birthYear, width / 2, height - 50);
 
