@@ -25,7 +25,7 @@ app.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const width = 1920;
+    const width = 1920; // Вернули размер
     const height = 1080;
     const canvas = createCanvas(width, height);
     const ctx = canvas.getContext('2d');
@@ -34,13 +34,9 @@ app.post('/generate', async (req, res) => {
     const bgImage = await loadImageFromUrl(BACKGROUND_URL);
     ctx.drawImage(bgImage, 0, 0, width, height);
 
-    // Делаем фон чуть темнее для контраста
-    //ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-    //ctx.fillRect(0, 0, width, height);
-
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 196px Arial';
+    ctx.font = 'bold 96px Arial'; // Уменьшили шрифт для надёжности
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
@@ -53,12 +49,12 @@ app.post('/generate', async (req, res) => {
 
     // Названия команд
     const teamNameY = 250;
-    const teamLogoY = 350;
+    const teamLogoY = 200; // Сдвинули логотипы выше
     const homeX = width * 0.25;
     const awayX = width * 0.75;
     const vsX = width / 2;
 
-    ctx.font = 'bold 172px Arial';
+    ctx.font = 'bold 72px Arial';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
@@ -70,35 +66,25 @@ app.post('/generate', async (req, res) => {
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
 
-    // Логотипы
-    const logoSize = 400; // Увеличили размер
+    // Логотипы — без кругов
+    const logoSize = 300; // Оставили 300 — хороший баланс
 
-    // Рисуем белый круг под логотипом хозяев
-    //if (homeLogo) {
-      //ctx.beginPath();
-      //ctx.arc(homeX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
-      //ctx.fillStyle = 'white';
-      //ctx.fill();
-      //const homeLogoImg = await loadImageFromUrl(homeLogo);
-      //ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY, logoSize, logoSize);
-    //}
+    if (homeLogo) {
+      const homeLogoImg = await loadImageFromUrl(homeLogo);
+      ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY, logoSize, logoSize);
+    }
 
-    // Рисуем белый круг под логотипом гостей
-    //if (awayLogo) {
-      //ctx.beginPath();
-      //ctx.arc(awayX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
-      //ctx.fillStyle = 'white';
-      //ctx.fill();
-      //const awayLogoImg = await loadImageFromUrl(awayLogo);
-      //ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY, logoSize, logoSize);
-    //}
+    if (awayLogo) {
+      const awayLogoImg = await loadImageFromUrl(awayLogo);
+      ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY, logoSize, logoSize);
+    }
 
     // "VS" между логотипами
-    ctx.font = 'bold 240px Arial';
-    ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40); // Центрировали
+    ctx.font = 'bold 80px Arial';
+    ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40);
 
     // Год рождения — снизу по центру
-    ctx.font = 'bold 164px Arial';
+    ctx.font = 'bold 64px Arial';
     ctx.textBaseline = 'bottom';
     ctx.fillText(birthYear, width / 2, height - 50);
 
