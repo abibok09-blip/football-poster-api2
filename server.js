@@ -34,10 +34,22 @@ app.post('/generate', async (req, res) => {
     const bgImage = await loadImageFromUrl(BACKGROUND_URL);
     ctx.drawImage(bgImage, 0, 0, width, height);
 
+    // Делаем фон чуть темнее для контраста
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    ctx.fillRect(0, 0, width, height);
+
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 72px Arial';
+    ctx.font = 'bold 96px Arial';
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
     ctx.fillText('Наше будущее', width / 2, 50);
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
 
     // Названия команд
     const teamNameY = 250;
@@ -46,27 +58,47 @@ app.post('/generate', async (req, res) => {
     const awayX = width * 0.75;
     const vsX = width / 2;
 
-    ctx.font = 'bold 48px Arial';
+    ctx.font = 'bold 72px Arial';
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
     ctx.fillText(homeTeam, homeX, teamNameY);
     ctx.fillText(awayTeam, awayX, teamNameY);
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
 
     // Логотипы
-    const logoSize = 200;
+    const logoSize = 300; // Увеличили размер
+
+    // Рисуем белый круг под логотипом хозяев
     if (homeLogo) {
+      ctx.beginPath();
+      ctx.arc(homeX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
       const homeLogoImg = await loadImageFromUrl(homeLogo);
       ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY, logoSize, logoSize);
     }
+
+    // Рисуем белый круг под логотипом гостей
     if (awayLogo) {
+      ctx.beginPath();
+      ctx.arc(awayX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
       const awayLogoImg = await loadImageFromUrl(awayLogo);
       ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY, logoSize, logoSize);
     }
 
     // "VS" между логотипами
-    ctx.font = 'bold 64px Arial';
-    ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 32);
+    ctx.font = 'bold 80px Arial';
+    ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40); // Центрировали
 
     // Год рождения — снизу по центру
-    ctx.font = 'bold 48px Arial';
+    ctx.font = 'bold 64px Arial';
     ctx.textBaseline = 'bottom';
     ctx.fillText(birthYear, width / 2, height - 50);
 
