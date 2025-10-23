@@ -25,7 +25,7 @@ app.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const width = 1920; // Вернули размер
+    const width = 1920;
     const height = 1080;
     const canvas = createCanvas(width, height);
     const ctx = canvas.getContext('2d');
@@ -36,20 +36,20 @@ app.post('/generate', async (req, res) => {
 
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 96px Arial'; // Уменьшили шрифт для надёжности
+    ctx.font = 'bold 96px Arial';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
     ctx.shadowOffsetY = 3;
-    ctx.fillText('Наше будущее', width / 2, 50);
+    ctx.fillText('Наше будущее', width / 2, 100); // Сдвинули ниже
     ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
 
     // Названия команд
-    const teamNameY = 250;
-    const teamLogoY = 200; // Сдвинули логотипы выше
+    const teamNameY = 150; // Сдвинули выше
+    const teamLogoY = 150; // Сдвинули выше
     const homeX = width * 0.25;
     const awayX = width * 0.75;
     const vsX = width / 2;
@@ -67,7 +67,7 @@ app.post('/generate', async (req, res) => {
     ctx.shadowOffsetY = 0;
 
     // Логотипы — без кругов
-    const logoSize = 300; // Оставили 300 — хороший баланс
+    const logoSize = 300;
 
     if (homeLogo) {
       const homeLogoImg = await loadImageFromUrl(homeLogo);
