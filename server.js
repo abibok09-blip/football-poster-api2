@@ -71,7 +71,7 @@ app.post('/generate', async (req, res) => {
     ctx.shadowOffsetY = 0;
 
     // Логотипы
-    const logoSize = 300; // Увеличили размер
+    const logoSize = 400; // Увеличили размер
 
     // Рисуем белый круг под логотипом хозяев
     if (homeLogo) {
@@ -94,7 +94,7 @@ app.post('/generate', async (req, res) => {
     }
 
     // "VS" между логотипами
-    ctx.font = 'bold 80px Arial';
+    ctx.font = 'bold 140px Arial';
     ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40); // Центрировали
 
     // Год рождения — снизу по центру
