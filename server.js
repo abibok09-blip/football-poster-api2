@@ -25,8 +25,8 @@ app.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const width = 1920;
-    const height = 1080;
+    const width = 1280;
+    const height = 720;
     const canvas = createCanvas(width, height);
     const ctx = canvas.getContext('2d');
 
@@ -35,8 +35,8 @@ app.post('/generate', async (req, res) => {
     ctx.drawImage(bgImage, 0, 0, width, height);
 
     // Делаем фон чуть темнее для контраста
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-    ctx.fillRect(0, 0, width, height);
+    //ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    //ctx.fillRect(0, 0, width, height);
 
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
