@@ -36,25 +36,27 @@ app.post('/generate', async (req, res) => {
 
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 96px Arial';
+    ctx.font = 'bold 120px Arial';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
     ctx.shadowOffsetY = 3;
-    ctx.fillText('Наше будущее', width / 2, 100); // Сдвинули ниже
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Наше будущее', width / 2, height * 0.1);
     ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
 
     // Названия команд
-    const teamNameY = 150; // Сдвинули выше
-    const teamLogoY = 150; // Сдвинули выше
+    const teamNameY = height * 0.2;
+    const teamLogoY = height * 0.3;
     const homeX = width * 0.25;
     const awayX = width * 0.75;
     const vsX = width / 2;
 
-    ctx.font = 'bold 72px Arial';
+    ctx.font = 'bold 96px Arial';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
@@ -67,24 +69,24 @@ app.post('/generate', async (req, res) => {
     ctx.shadowOffsetY = 0;
 
     // Логотипы — без кругов
-    const logoSize = 300;
+    const logoSize = 400;
 
     if (homeLogo) {
       const homeLogoImg = await loadImageFromUrl(homeLogo);
-      ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY, logoSize, logoSize);
+      ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY - logoSize / 2, logoSize, logoSize);
     }
 
     if (awayLogo) {
       const awayLogoImg = await loadImageFromUrl(awayLogo);
-      ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY, logoSize, logoSize);
+      ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY - logoSize / 2, logoSize, logoSize);
     }
 
     // "VS" между логотипами
-    ctx.font = 'bold 80px Arial';
+    ctx.font = 'bold 144px Arial';
     ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40);
 
     // Год рождения — снизу по центру
-    ctx.font = 'bold 64px Arial';
+    ctx.font = 'bold 80px Arial';
     ctx.textBaseline = 'bottom';
     ctx.fillText(birthYear, width / 2, height - 50);
 
