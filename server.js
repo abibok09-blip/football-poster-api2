@@ -25,8 +25,8 @@ app.post('/generate', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const width = 1280;
-    const height = 720;
+    const width = 1920;
+    const height = 1080;
     const canvas = createCanvas(width, height);
     const ctx = canvas.getContext('2d');
 
@@ -74,24 +74,24 @@ app.post('/generate', async (req, res) => {
     const logoSize = 400; // Увеличили размер
 
     // Рисуем белый круг под логотипом хозяев
-    if (homeLogo) {
-      ctx.beginPath();
-      ctx.arc(homeX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      const homeLogoImg = await loadImageFromUrl(homeLogo);
-      ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY, logoSize, logoSize);
-    }
+    //if (homeLogo) {
+      //ctx.beginPath();
+      //ctx.arc(homeX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
+      //ctx.fillStyle = 'white';
+      //ctx.fill();
+      //const homeLogoImg = await loadImageFromUrl(homeLogo);
+      //ctx.drawImage(homeLogoImg, homeX - logoSize / 2, teamLogoY, logoSize, logoSize);
+    //}
 
     // Рисуем белый круг под логотипом гостей
-    if (awayLogo) {
-      ctx.beginPath();
-      ctx.arc(awayX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      const awayLogoImg = await loadImageFromUrl(awayLogo);
-      ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY, logoSize, logoSize);
-    }
+    //if (awayLogo) {
+      //ctx.beginPath();
+      //ctx.arc(awayX, teamLogoY + logoSize / 2, logoSize / 2 + 10, 0, Math.PI * 2);
+      //ctx.fillStyle = 'white';
+      //ctx.fill();
+      //const awayLogoImg = await loadImageFromUrl(awayLogo);
+      //ctx.drawImage(awayLogoImg, awayX - logoSize / 2, teamLogoY, logoSize, logoSize);
+    //}
 
     // "VS" между логотипами
     ctx.font = 'bold 240px Arial';
