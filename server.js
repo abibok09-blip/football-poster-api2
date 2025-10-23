@@ -36,27 +36,26 @@ app.post('/generate', async (req, res) => {
 
     // "Наше будущее" — сверху по центру
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 120px Arial';
+    ctx.font = 'bold 160px Arial'; // Увеличили шрифт
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
     ctx.shadowOffsetY = 3;
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('Наше будущее', width / 2, height * 0.1);
+    ctx.fillText('Наше будущее', width / 2, 100); // Сдвинули ниже
     ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
 
     // Названия команд
-    const teamNameY = height * 0.2;
-    const teamLogoY = height * 0.3;
+    const teamNameY = 200; // Сдвинули выше
+    const teamLogoY = 250; // Сдвинули выше
     const homeX = width * 0.25;
     const awayX = width * 0.75;
     const vsX = width / 2;
 
-    ctx.font = 'bold 96px Arial';
+    ctx.font = 'bold 120px Arial'; // Увеличили шрифт
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 10;
     ctx.shadowOffsetX = 3;
@@ -82,11 +81,11 @@ app.post('/generate', async (req, res) => {
     }
 
     // "VS" между логотипами
-    ctx.font = 'bold 144px Arial';
-    ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 40);
+    ctx.font = 'bold 200px Arial'; // Увеличили шрифт
+    ctx.fillText('VS', vsX, teamLogoY + logoSize / 2 - 60); // Сдвинули выше
 
     // Год рождения — снизу по центру
-    ctx.font = 'bold 80px Arial';
+    ctx.font = 'bold 100px Arial'; // Увеличили шрифт
     ctx.textBaseline = 'bottom';
     ctx.fillText(birthYear, width / 2, height - 50);
 
